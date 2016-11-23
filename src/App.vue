@@ -1,16 +1,23 @@
 <template lang="pug">
   #app
-    img(src='./assets/liam.jpg')
-    <todoList></todoList>
+    .mdl-grid
+      .mdl-cell.mdl-cell--4-col
+        <todoList></todoList>
+      .mdl-cell.mdl-cell--4-col
+        <task></task>
+      .mdl-cell.mdl-cell--4-col
+        <dashboard></dashboard>
 </template>
 
 <script>
 import TodoList from './components/TodoList'
+import Task from './components/Task'
+import Dashboard from './components/Dashboard'
 
 export default {
   name: 'app',
   components: {
-    TodoList
+    TodoList, Task, Dashboard
   }
 }
 </script>
@@ -22,15 +29,4 @@ export default {
   -moz-osx-font-smoothing grayscale
   text-align center
   color #2c3e50
-  margin-top 60px
-
-  header
-    background-color #3B3B3B
-    position fixed
-    margin-bottom 30px
-    z-index 999
-    height 55px
-    top 0
-    left 0
-    right 0
 </style>

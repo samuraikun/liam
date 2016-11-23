@@ -1,5 +1,5 @@
 <template lang="pug">
-  .todoList
+  .task
     h3 {{ msg }}
     p Simple Reactive Todo application
     p Ecosystem
@@ -16,10 +16,10 @@
 
 <script>
 export default {
-  name: 'TodoList',
+  name: 'Task',
   data () {
     return {
-      msg: 'TodoList'
+      msg: 'Task'
     }
   }
 }
@@ -27,7 +27,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="stylus" scoped>
-.todoList
+.task
   h1, h2
     font-weight normal
 
@@ -40,5 +40,5 @@ export default {
     margin 0 10px
 
   a
-    color #FF7F00
+    color #42b983
 </style>
