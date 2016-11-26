@@ -1,44 +1,45 @@
 <template lang="pug">
   .task
-    h3 {{ msg }}
-    p Simple Reactive Todo application
-    p Ecosystem
-    ul
-      li
-        a(href='http://router.vuejs.org/', target='_blank') vue-router
-      li
-        a(href='http://vuex.vuejs.org/', target='_blank') vuex
-      li
-        a(href='http://vue-loader.vuejs.org/', target='_blank') vue-loader
-      li
-        a(href='https://github.com/vuejs/awesome-vue', target='_blank') awesome-vue
+    form(action='#')
+      .mdl-textfield.mdl-js-textfield
+        input#sample1.mdl-textfield__input(type='text')
+        label.mdl-textfield__label(for='sample1') Create Your Task...
+
+    table.mdl-data-table.mdl-js-data-table.mdl-data-table--selectable
+      thead
+        tr
+          th.mdl-data-table__cell--non-numeric Material
+          th Quantity
+          th Unit price
+      tbody
+        tr
+          td.mdl-data-table__cell--non-numeric Acrylic (Transparent)
+          td 250
+          td $2.90
+        tr
+          td.mdl-data-table__cell--non-numeric Plywood (Birch)
+          td 50
+          td $1.25
+        tr
+          td.mdl-data-table__cell--non-numeric Laminate (Gold on Blue)
+          td 10
+          td $12.35
+
+
 </template>
 
 <script>
 export default {
-  name: 'Task',
-  data () {
-    return {
-      msg: 'Task'
-    }
-  }
+  name: 'Task'
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="stylus" scoped>
-.task
-  h1, h2
-    font-weight normal
+  .task
+    height 100%
+    // background-image url("../assets/wood_panel.jpg")
 
-  ul
-    list-style-type none
-    padding 0
-
-  li
-    display inline-block
-    margin 0 10px
-
-  a
-    color #42b983
+    form
+      display flex
+      justify-content center
 </style>
