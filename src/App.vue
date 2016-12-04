@@ -1,32 +1,26 @@
 <template lang="pug">
   #app
-    .mdl-grid
-      .mdl-cell.mdl-cell--4-col
-        <todoList></todoList>
-      .mdl-cell.mdl-cell--4-col
-        <task></task>
-      .mdl-cell.mdl-cell--4-col
-        <dashboard></dashboard>
+    <taskList></taskList>
+    <!-- .mdl-grid
+      .mdl-cell.mdl-cell-4-col
+        <taskNameList></taskNameList>
+      .mdl-cell.mdl-cell-4-col
+        <taskList></taskList>
+      .mdl-cell.mdl-cell-8-col
+        <dashboard></dashboard> -->
 </template>
 
 <script>
-import TodoList from './components/TodoList'
-import Task from './components/Task'
-import Dashboard from './components/Dashboard'
+// import TaskNameList from './components/TaskNameList'
+import TaskList from './components/TaskList'
+// import Dashboard from './components/Dashboard'
 
 export default {
   name: 'app',
   components: {
-    TodoList, Task, Dashboard
+    TaskList
   }
 }
 </script>
 
-<style lang="stylus">
-#app
-  font-family 'Avenir', Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  text-align center
-  color #2c3e50
-</style>
+<style lang="stylus"></style>

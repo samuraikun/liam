@@ -1,44 +1,59 @@
-<template lang="pug">
-  .task
-    h3 {{ msg }}
-    p Simple Reactive Todo application
-    p Ecosystem
-    ul
-      li
-        a(href='http://router.vuejs.org/', target='_blank') vue-router
-      li
-        a(href='http://vuex.vuejs.org/', target='_blank') vuex
-      li
-        a(href='http://vue-loader.vuejs.org/', target='_blank') vue-loader
-      li
-        a(href='https://github.com/vuejs/awesome-vue', target='_blank') awesome-vue
+<template lang='pug'>
+  li.task(:class='{ completed: task.done, editing: editing }')
+    .view
+      input.toggle(type='checkbox', :checked='task.done', @change='TOGGLE_TASK({ task: task })')
+      label(v-text='task.text', @dblclick='editing = true')
+      button.destroy(@click='DELETE_TASK({ task: task })')
+    input.edit(v-show='editing', v-focus='editing', :value='task.text', @keyup.enter='doneEdit', @keyup.esc='cancelEdit', @blur='doneEdit')
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   name: 'Task',
+  props: ['task'],
   data () {
     return {
-      msg: 'Task'
+      editing: false
+    }
+  },
+  directives: {
+    focus (el, { value }, { context }) {
+      if (value) {
+        context.$nextTick(() => {
+          el.focus()
+        })
+      }
+    }
+  },
+  methods: {
+    ...mapMutations([
+      'EDIT_TASK',
+      'TOGGLE_TASK',
+      'DELETE_TASK'
+    ]),
+    doneEdit (e) {
+      const value = e.target.value.trim()
+      const { task } = this
+      if (!value) {
+        this.DELETE_TASK({
+          task
+        })
+      } else if (this.editing) {
+        this.EDIT_TASK({
+          task,
+          value
+        })
+        this.editing = false
+      }
+    },
+    cancelEdit (e) {
+      e.target.value = this.task.text
+      this.editing = false
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="stylus" scoped>
-.task
-  h1, h2
-    font-weight normal
-
-  ul
-    list-style-type none
-    padding 0
-
-  li
-    display inline-block
-    margin 0 10px
-
-  a
-    color #42b983
-</style>
+<style lang='stylus'></style>

@@ -1,7 +1,5 @@
 # Liam
 
-![liam](./src/assets/liam.jpg)
-
 > "Liam" is a Simple Reactive Todo application with rendering graph in same time and real time.
 
 ## Build Setup
