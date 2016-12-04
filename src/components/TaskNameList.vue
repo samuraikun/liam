@@ -1,5 +1,7 @@
 <template lang="pug">
   .taskNameList
+    h3 {{ msg }}
+
     .task-bar
       button#demo-menu-lower-left.mdl-button.mdl-js-button.mdl-button--icon
         i.material-icons more_vert
@@ -13,14 +15,8 @@
 <script>
 export default {
   name: 'TaskNameList',
-  data: {
-    msg: 'Test'
-  },
-  computed: {
-    addMsg: function () {
-      // `this` は vm インスタンスを指します
-      return this.msg + 'hoge'
-    }
+  data () {
+    return { msg: 'Todo一覧' }
   }
 }
 </script>
@@ -28,6 +24,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="stylus" scoped>
   .taskNameList
+      h3
+        text-align center
+
       .task-bar
         background-color #00FFFF
         height 50px

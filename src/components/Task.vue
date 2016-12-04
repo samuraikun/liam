@@ -1,45 +1,59 @@
-<template lang="pug">
-  .task
-    form(action='#')
-      .mdl-textfield.mdl-js-textfield
-        input#sample1.mdl-textfield__input(type='text')
-        label.mdl-textfield__label(for='sample1') Create Your Task...
-
-    table.mdl-data-table.mdl-js-data-table.mdl-data-table--selectable
-      thead
-        tr
-          th.mdl-data-table__cell--non-numeric Material
-          th Quantity
-          th Unit price
-      tbody
-        tr
-          td.mdl-data-table__cell--non-numeric Acrylic (Transparent)
-          td 250
-          td $2.90
-        tr
-          td.mdl-data-table__cell--non-numeric Plywood (Birch)
-          td 50
-          td $1.25
-        tr
-          td.mdl-data-table__cell--non-numeric Laminate (Gold on Blue)
-          td 10
-          td $12.35
-
-
+<template lang='pug'>
+  li.task(:class='{ completed: task.done, editing: editing }')
+    .view
+      input.toggle(type='checkbox', :checked='task.done', @change='TOGGLE_TASK({ task: task })')
+      label(v-text='task.text', @dblclick='editing = true')
+      button.destroy(@click='DELETE_TASK({ task: task })')
+    input.edit(v-show='editing', v-focus='editing', :value='task.text', @keyup.enter='doneEdit', @keyup.esc='cancelEdit', @blur='doneEdit')
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
-  name: 'Task'
+  name: 'Task',
+  props: ['task'],
+  data () {
+    return {
+      editing: false
+    }
+  },
+  directives: {
+    focus (el, { value }, { context }) {
+      if (value) {
+        context.$nextTick(() => {
+          el.focus()
+        })
+      }
+    }
+  },
+  methods: {
+    ...mapMutations([
+      'EDIT_TASK',
+      'TOGGLE_TASK',
+      'DELETE_TASK'
+    ]),
+    doneEdit (e) {
+      const value = e.target.value.trim()
+      const { task } = this
+      if (!value) {
+        this.DELETE_TASK({
+          task
+        })
+      } else if (this.editing) {
+        this.EDIT_TASK({
+          task,
+          value
+        })
+        this.editing = false
+      }
+    },
+    cancelEdit (e) {
+      e.target.value = this.task.text
+      this.editing = false
+    }
+  }
 }
 </script>
 
-<style lang="stylus" scoped>
-  .task
-    height 100%
-    // background-image url("../assets/wood_panel.jpg")
-
-    form
-      display flex
-      justify-content center
-</style>
+<style lang='stylus'></style>
